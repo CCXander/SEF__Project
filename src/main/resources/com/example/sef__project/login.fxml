@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="390.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sef__project.Login">
+   <children>
+      <AnchorPane layoutY="-6.0" prefHeight="409.0" prefWidth="600.0">
+         <children>
+            <SplitPane dividerPositions="0.205685618729097" layoutY="7.0" prefHeight="393.0" prefWidth="600.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="401.0" prefWidth="181.0" style="-fx-background-color: ff5555;" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="207.0" prefWidth="202.0">
+                     <children>
+                        <SplitPane dividerPositions="0.19794344473007713" orientation="VERTICAL" prefHeight="391.0" prefWidth="472.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: grey;">
+                                 <children>
+                                    <Label alignment="TOP_CENTER" layoutX="182.0" layoutY="12.0" text="Log in">
+                                       <font>
+                                          <Font name="Sylfaen" size="40.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
