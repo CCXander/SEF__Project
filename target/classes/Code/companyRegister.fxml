@@ -45,6 +45,7 @@
                      </font>
                   </Button>
                   <PasswordField fx:id="passwordTextField" layoutX="300.0" layoutY="82.0" />
+                  <Label fx:id="inputError" layoutX="274.0" layoutY="212.0" text="* - Not all fields have been completed" textFill="RED" />
                </children>
             </Pane>
          </center>

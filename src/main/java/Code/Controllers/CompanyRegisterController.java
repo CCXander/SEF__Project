@@ -29,15 +29,25 @@ public class CompanyRegisterController {
 @FXML
     private TextField HQAddressTextField;
 
+@FXML
+    private Label inputError;
+
     public String username;
     public String password;
     public String companyPhone;
     public String HQAddress;
+    public int valid;
 
     private Stage stage;
     private Scene scene;
 
+    public void initialize() {
+        inputError.setVisible(false);
+    }
+
     public void onRegisterButtonClick(ActionEvent event) throws IOException {
+
+        valid=1;
 
         username="";
         password="";
@@ -54,12 +64,21 @@ public class CompanyRegisterController {
         System.out.println(companyPhone);
         System.out.println(HQAddress);
 
+        if(username.equals("") || password.equals("") || companyPhone.equals("") || HQAddress.equals("")){
+            valid=0;
+        }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
-        scene = new Scene(fxmlLoader.load());
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        if(valid==0){
+            inputError.setVisible(true);
+        }else {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+            scene = new Scene(fxmlLoader.load());
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+        passwordTextField.clear();
     }
 
     public void onBackButtonClick(ActionEvent event) throws IOException {
