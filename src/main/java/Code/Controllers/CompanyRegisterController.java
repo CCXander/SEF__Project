@@ -1,4 +1,4 @@
 package Code.Controllers;
 
-public class CompanyRegisterController {
+public class CompanyRegisterController {//comment for test
 }
