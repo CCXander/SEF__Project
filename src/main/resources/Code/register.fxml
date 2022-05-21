@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Code.Controllers.RegisterController">
    <children>
       <SplitPane cacheShape="false" dividerPositions="0.19899665551839466" prefHeight="407.0" prefWidth="600.0">
         <items>
@@ -24,14 +24,14 @@
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Hyperlink layoutX="271.0" layoutY="279.0" text="Log in here" />
+                        <Hyperlink layoutX="271.0" layoutY="279.0" onAction="#onRegLinkClick" text="Log in here" />
                         <Label layoutX="136.0" layoutY="282.0" text="Already have an account?" />
-                        <Button layoutX="124.0" layoutY="76.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="229.0" text="Register as Company">
+                        <Button layoutX="124.0" layoutY="76.0" mnemonicParsing="false" onAction="#onCompanyButtonClick" prefHeight="51.0" prefWidth="229.0" text="Register as Company">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Button>
-                        <Button layoutX="124.0" layoutY="144.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="229.0" text="Register as Customer">
+                        <Button layoutX="124.0" layoutY="144.0" mnemonicParsing="false" onAction="#onCustomerButtonClick" prefHeight="44.0" prefWidth="229.0" text="Register as Customer">
                            <font>
                               <Font size="21.0" />
                            </font>
