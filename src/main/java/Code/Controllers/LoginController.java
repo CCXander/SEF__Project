@@ -29,7 +29,7 @@ public class LoginController {
     @FXML
     private Label loginError;
 
-    public String username;
+    public static String username;
     public String password;
     public int valid;
     public int offset;

@@ -28,6 +28,9 @@ public class RegisterController {
     private Hyperlink toLoginHyperlink;
 
     @FXML
+    private Button exitButton;
+
+    @FXML
     public void onCompanyButtonClick(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("companyRegister.fxml"));
         scene = new Scene(fxmlLoader.load());
@@ -52,5 +55,11 @@ public class RegisterController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void onExitButtonClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
     }
 }
