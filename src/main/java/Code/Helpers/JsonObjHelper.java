@@ -161,5 +161,41 @@ public class JsonObjHelper {
         }
     }
 
+    public static String printProducts (){
+        JSONObject obj = new JSONObject();
+        JSONArray userList;
+        String products="";
+        String productName="";
+        String productDescription="";
+        String productPrice="";
+        String productCompany="";
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                productName = (String) json.get("name");
+                productDescription = (String) json.get("description");
+                productPrice = (String) json.get("price");
+                productCompany = (String) json.get("company");
+
+
+                products+="Name: "+productName+"\nDescription: "+productDescription+"\nPrice: "+productPrice+"\nCompany: "+productCompany+"\n\n";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return products;
+        }
+    }
+
 }
 
