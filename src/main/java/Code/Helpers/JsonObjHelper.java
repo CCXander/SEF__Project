@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.util.Iterator;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import Code.Controllers.LoginController;
 
 public class JsonObjHelper {
 
@@ -125,6 +126,38 @@ public class JsonObjHelper {
             e.printStackTrace();
         }finally {
             return userType;
+        }
+    }
+
+    public static void createProduct(String name, String description, String price) {
+        JSONObject obj = new JSONObject();
+        JSONArray productList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            productList = (JSONArray) jsonObj;
+
+            obj.put("name", name);
+            obj.put("description", description);
+            obj.put("price", price);
+            obj.put("company", LoginController.username);
+
+            productList.add(obj);
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/products.json");
+                file.write(productList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
