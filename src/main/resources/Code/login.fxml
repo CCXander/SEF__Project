@@ -16,7 +16,7 @@
                 <Pane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
                     <children>
                         <Pane prefHeight="400.0" prefWidth="120.0" style="-fx-background-color: ff5555;" />
-                        <Label layoutX="232.0" layoutY="25.0" text="Logging in">
+                        <Label layoutX="252.0" layoutY="25.0" prefHeight="51.0" prefWidth="187.0" text="Logging in">
                             <font>
                                 <Font name="Sylfaen" size="40.0" />
                             </font>
@@ -32,15 +32,15 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="usernameTextField" layoutX="226.0" layoutY="83.0" />
-                  <Label layoutX="150.0" layoutY="87.0" text="Username:" />
-                  <Label layoutX="150.0" layoutY="129.0" text="Password:" />
+                  <TextField fx:id="usernameTextField" layoutX="226.0" layoutY="71.0" />
+                  <Label layoutX="150.0" layoutY="75.0" text="Username:" />
+                  <Label layoutX="152.0" layoutY="121.0" text="Password:" />
                    <Button layoutX="148.0" layoutY="248.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="25.0" prefWidth="60.0" text="Back">
                        <font>
                            <Font name="System Bold" size="12.0" />
                        </font>
                    </Button>
-                  <PasswordField fx:id="passwordTextField" layoutX="226.0" layoutY="125.0" />
+                  <PasswordField fx:id="passwordTextField" layoutX="226.0" layoutY="117.0" />
                    <Label fx:id="inputError" layoutX="274.0" layoutY="212.0" text="* - Not all fields have been completed" textFill="RED" />
                   <Label fx:id="loginError" layoutX="274.0" layoutY="195.0" text="* - Incorect Username or Password" textFill="RED" />
                </children>
