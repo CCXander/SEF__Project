@@ -1,6 +1,7 @@
 module com.example.sef__project {
     requires javafx.controls;
     requires javafx.fxml;
+    requires json.simple;
 
 
     opens Code to javafx.fxml;

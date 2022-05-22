@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import Code.Helpers.Cryptography;
+import Code.Helpers.JsonObjHelper;
 
 import java.io.IOException;
 
@@ -62,13 +63,6 @@ public class CompanyRegisterController {
         companyPhone = String.valueOf(companyPhoneTextField.getText());
         HQAddress = String.valueOf(HQAddressTextField.getText());
 
-//        System.out.println(username);
-//        System.out.println(password);
-//        System.out.println(companyPhone);
-//        System.out.println(HQAddress);
-
-        password=Cryptography.encriptCypher(password,offset);
-
         if(username.equals("") || password.equals("") || companyPhone.equals("") || HQAddress.equals("")){
             valid=0;
         }
@@ -76,6 +70,8 @@ public class CompanyRegisterController {
         if(valid==0){
             inputError.setVisible(true);
         }else {
+            password=Cryptography.encriptCypher(password,offset);
+            JsonObjHelper.createCompany(username,password,companyPhone,HQAddress);
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
             scene = new Scene(fxmlLoader.load());
