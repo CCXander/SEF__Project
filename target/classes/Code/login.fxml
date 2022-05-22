@@ -42,6 +42,7 @@
                    </Button>
                   <PasswordField fx:id="passwordTextField" layoutX="226.0" layoutY="125.0" />
                    <Label fx:id="inputError" layoutX="274.0" layoutY="212.0" text="* - Not all fields have been completed" textFill="RED" />
+                  <Label fx:id="loginError" layoutX="274.0" layoutY="195.0" text="* - Incorect Username or Password" textFill="RED" />
                </children>
                 </Pane>
             </center>

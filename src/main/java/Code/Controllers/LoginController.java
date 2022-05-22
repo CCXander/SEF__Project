@@ -1,5 +1,6 @@
 package Code.Controllers;
 
+import Code.Helpers.JsonObjHelper;
 import Code.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,9 @@ public class LoginController {
     @FXML
     private Label inputError;
 
+    @FXML
+    private Label loginError;
+
     public String username;
     public String password;
     public int valid;
@@ -32,6 +36,7 @@ public class LoginController {
 
     public void initialize() {
         inputError.setVisible(false);
+        loginError.setVisible(false);
     }
 
     @FXML
@@ -54,13 +59,24 @@ public class LoginController {
             inputError.setVisible(true);
         }else {
 
-            System.out.println("Works!");
+            int userType = JsonObjHelper.readUser(username, password);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
-            scene = new Scene(fxmlLoader.load());
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            if(userType==1){
+                loginError.setVisible(true);
+            }else if(userType==2){
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("customerHome.fxml"));
+                scene = new Scene(fxmlLoader.load());
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }else if(userType==3){
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("companyHome.fxml"));
+                scene = new Scene(fxmlLoader.load());
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }
+
         }
         passwordTextField.clear();
     }
