@@ -7,9 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,12 +17,52 @@ public class LoginController {
     private Scene scene;
 
     @FXML
+    private TextField usernameTextField;
+
+    @FXML
+    private PasswordField passwordTextField;
+
+    @FXML
+    private Label inputError;
+
+    public String username;
+    public String password;
+    public int valid;
+    public int offset;
+
+    public void initialize() {
+        inputError.setVisible(false);
+    }
+
+    @FXML
     public void onLoginClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
-        scene = new Scene(fxmlLoader.load());
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+
+        valid=1;
+        offset=4;
+
+        username="";
+        password="";
+
+        username = String.valueOf(usernameTextField.getText());
+        password = String.valueOf(passwordTextField.getText());
+
+        if(username.equals("") || password.equals("")){
+            valid=0;
+        }
+
+        if(valid==0){
+            inputError.setVisible(true);
+        }else {
+
+            System.out.println("Works!");
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+            scene = new Scene(fxmlLoader.load());
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+        passwordTextField.clear();
     }
 
     @FXML

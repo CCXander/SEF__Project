@@ -39,7 +39,7 @@ public class CompanyRegisterController {
     public String companyPhone;
     public String HQAddress;
     public int valid;
-    private int offset;
+    public int offset;
 
     private Stage stage;
     private Scene scene;
