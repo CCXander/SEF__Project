@@ -16,6 +16,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>18-ea+2</version>
@@ -37,6 +42,30 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.clumd.projects</groupId>
+            <artifactId>Java-JSON</artifactId>
+            <version>1.0.3</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.progsbase.libraries</groupId>
+            <artifactId>JSON</artifactId>
+            <version>0.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fiennes</groupId>
+            <artifactId>JSON-java</artifactId>
+            <version>2.3.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220320</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
