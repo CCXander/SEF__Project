@@ -5,10 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import Code.Helpers.Cryptography;
+import Code.Helpers.JsonObjHelper;
 
 import java.io.IOException;
 
@@ -34,6 +39,7 @@ public class CustomerRegisterController {
     public String customerPhone;
     public String personalAddress;
     public int valid;
+    private int offset;
 
     private Stage stage;
     private Scene scene;
@@ -45,6 +51,7 @@ public class CustomerRegisterController {
     public void onRegisterButtonClick(ActionEvent event) throws IOException {
 
         valid=1;
+        offset=4;
 
         username="";
         password="";
@@ -56,11 +63,6 @@ public class CustomerRegisterController {
         customerPhone = String.valueOf(customerPhoneTextField.getText());
         personalAddress = String.valueOf(personalAddressTextField.getText());
 
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(customerPhone);
-        System.out.println(personalAddress);
-
         if(username.equals("") || password.equals("") || customerPhone.equals("") || personalAddress.equals("")){
             valid=0;
         }
@@ -68,6 +70,9 @@ public class CustomerRegisterController {
         if(valid==0){
             inputError.setVisible(true);
         }else {
+            password=Cryptography.encriptCypher(password,offset);
+            JsonObjHelper.createCustomer(username,password,customerPhone,personalAddress);
+
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
             scene = new Scene(fxmlLoader.load());
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

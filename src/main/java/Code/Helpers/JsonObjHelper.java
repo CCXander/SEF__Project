@@ -2,31 +2,79 @@ package Code.Helpers;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Iterator;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class JsonObjHelper {
 
     public static void createCompany(String username, String password, String companyPhone, String HQAddress){
         JSONObject obj = new JSONObject();
-
-        obj.put("username", username);
-        obj.put("password", password);
-        obj.put("companyPhone", companyPhone);
-        obj.put("HQAddress", HQAddress);
+        JSONArray companyList;
 
         try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/company.json");
+            Object jsonObj = parser.parse(reader);
+            companyList = (JSONArray) jsonObj;
 
-            FileWriter file = new FileWriter("company.json");
-            file.append(obj.toJSONString());
-            file.flush();
-            file.close();
+            obj.put("username", username);
+            obj.put("password", password);
+            obj.put("companyPhone", companyPhone);
+            obj.put("HQAddress", HQAddress);
 
-        } catch (IOException e) {
+            companyList.add(obj);
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/company.json");
+                file.write(companyList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
-        System.out.print(obj.toJSONString());
+    public static void createCustomer(String username, String password, String customerPhone, String personalAddress){
+        JSONObject obj = new JSONObject();
+        JSONArray customerList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/customer.json");
+            Object jsonObj = parser.parse(reader);
+            customerList = (JSONArray) jsonObj;
+
+            obj.put("username", username);
+            obj.put("password", password);
+            obj.put("customerPhone", customerPhone);
+            obj.put("personalAddress", personalAddress);
+
+            customerList.add(obj);
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/customer.json");
+                file.write(customerList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
