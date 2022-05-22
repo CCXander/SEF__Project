@@ -82,7 +82,6 @@ public class JsonObjHelper {
     public static int userType;//0-inital 1-incorect 2-customer 3-company
 
     public static int readUser (String username, String password){
-        JSONObject obj = new JSONObject();
         JSONArray userList;
 
         userType=0;
@@ -162,7 +161,6 @@ public class JsonObjHelper {
     }
 
     public static String printProducts (){
-        JSONObject obj = new JSONObject();
         JSONArray userList;
         String products="";
         String productName="";
@@ -188,6 +186,51 @@ public class JsonObjHelper {
 
 
                 products+="Name: "+productName+"\nDescription: "+productDescription+"\nPrice: "+productPrice+"\nCompany: "+productCompany+"\n\n";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return products;
+        }
+    }
+
+    public static String deleteProducts (String name){
+        JSONArray userList;
+        String products="";
+
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            int i=0;
+            int ok=1;
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(name.equals(json.get("name"))){
+                   break;
+                }else{
+                    if(ok==1)
+                        i++;
+                }
+            }
+
+            userList.remove(i);
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/products.json");
+                file.write(userList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         } catch (Exception e) {
