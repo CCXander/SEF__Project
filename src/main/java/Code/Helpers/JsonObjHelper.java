@@ -333,5 +333,68 @@ public class JsonObjHelper {
             e.printStackTrace();
         }
     }
+
+    public static boolean productExists (String name){
+        JSONArray userList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                System.out.println(json.get("name"));
+                if(name.equals(json.get("name"))){
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return false;
+        }
+    }
+
+    public static String printProduct (String name){
+        JSONArray userList;
+        String products="";
+        String productName="";
+        String productDescription="";
+        String productPrice="";
+        String productCompany="";
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(name.equals(json.get("name"))) {
+                    productName = (String) json.get("name");
+                    productDescription = (String) json.get("description");
+                    productPrice = (String) json.get("price");
+                    productCompany = (String) json.get("company");
+                    products+="Name: "+productName+"\nDescription: "+productDescription+"\nPrice: "+productPrice+"\nCompany: "+productCompany+"\n\n";
+                    return products;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return products;
+        }
+    }
+
 }
 
