@@ -44,7 +44,7 @@ public class CheckoutController {
     }
 
     public void onPurchaseButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("register.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("purchaseSuccess.fxml"));
         scene = new Scene(fxmlLoader.load());
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
