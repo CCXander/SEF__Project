@@ -58,14 +58,23 @@ public class CustomerHomeController {
 
     }
 
+    public void onProductListClick(){
+        productArea.setVisible(true);
+        CheckOutButton.setVisible(false);
+        searchErr.setVisible(false);
+        productArea.setText(JsonObjHelper.printProducts());
+    }
+
     public void onSearchButtonClick(){
-        String name=productArea.getText();
+        String name=searchField.getText();
         if(JsonObjHelper.productExists(name)){
+            System.out.println("Exists");
             productArea.setVisible(true);
             CheckOutButton.setVisible(true);
             searchErr.setVisible(false);
             productArea.setText(JsonObjHelper.printProduct(name));
         }else{
+            System.out.println("!Exists");
             productArea.setVisible(false);
             CheckOutButton.setVisible(false);
             searchErr.setVisible(true);

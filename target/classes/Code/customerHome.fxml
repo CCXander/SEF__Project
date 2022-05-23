@@ -44,6 +44,7 @@
                   </Label>
                   <Button fx:id="SearchButton" layoutX="422.0" layoutY="55.0" mnemonicParsing="false" onAction="#onSearchButtonClick" text="Search" />
                   <Label fx:id="searchErr" layoutX="149.0" layoutY="97.0" text="We are sorry, but no such product exists yet on our site!" textFill="RED" />
+                  <Button layoutX="372.0" layoutY="261.0" mnemonicParsing="false" onAction="#onProductListClick" text="Product list" />
                </children>
                 </Pane>
             </center>

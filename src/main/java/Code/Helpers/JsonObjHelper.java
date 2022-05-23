@@ -347,7 +347,6 @@ public class JsonObjHelper {
             while(iterator.hasNext()) {
                 JSONObject element = iterator.next();
                 JSONObject json = (JSONObject) parser.parse(element.toJSONString());
-                System.out.println(json.get("name"));
                 if(name.equals(json.get("name"))){
                     return true;
                 }
@@ -355,9 +354,9 @@ public class JsonObjHelper {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            return false;
         }
+        System.out.println("EE");
+        return false;
     }
 
     public static String printProduct (String name){
@@ -379,6 +378,7 @@ public class JsonObjHelper {
                 JSONObject element = iterator.next();
 
                 JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                //System.out.println(json.get("name"));
                 if(name.equals(json.get("name"))) {
                     productName = (String) json.get("name");
                     productDescription = (String) json.get("description");
