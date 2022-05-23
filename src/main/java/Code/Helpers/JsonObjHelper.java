@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.util.Iterator;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import Code.Controllers.LoginController;
 
 public class JsonObjHelper {
 
@@ -81,7 +82,6 @@ public class JsonObjHelper {
     public static int userType;//0-inital 1-incorect 2-customer 3-company
 
     public static int readUser (String username, String password){
-        JSONObject obj = new JSONObject();
         JSONArray userList;
 
         userType=0;
@@ -125,6 +125,274 @@ public class JsonObjHelper {
             e.printStackTrace();
         }finally {
             return userType;
+        }
+    }
+
+    public static void createProduct(String name, String description, String price) {
+        JSONObject obj = new JSONObject();
+        JSONArray productList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            productList = (JSONArray) jsonObj;
+
+            obj.put("name", name);
+            obj.put("description", description);
+            obj.put("price", price);
+            obj.put("company", LoginController.username);
+
+            productList.add(obj);
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/products.json");
+                file.write(productList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String printProducts (){
+        JSONArray userList;
+        String products="";
+        String productName="";
+        String productDescription="";
+        String productPrice="";
+        String productCompany="";
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                productName = (String) json.get("name");
+                productDescription = (String) json.get("description");
+                productPrice = (String) json.get("price");
+                productCompany = (String) json.get("company");
+
+
+                products+="Name: "+productName+"\nDescription: "+productDescription+"\nPrice: "+productPrice+"\nCompany: "+productCompany+"\n\n";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return products;
+        }
+    }
+
+    public static String deleteProducts (String name){
+        JSONArray userList;
+        String products="";
+
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            int i=0;
+            int ok=1;
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(name.equals(json.get("name"))){
+                   break;
+                }else{
+                    if(ok==1)
+                        i++;
+                }
+            }
+
+            userList.remove(i);
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/products.json");
+                file.write(userList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return products;
+        }
+    }
+
+    public static String[] setModifyText (String name) {
+        JSONArray userList;
+        String[] values = new String[3];
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            int i=0;
+            int ok=1;
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(name.equals(json.get("name"))){
+                    values[0]=name;
+                    values[1]=(String) json.get("description");
+                    values[2]=(String)json.get("price");
+                    break;
+                }else{
+                    if(ok==1)
+                        i++;
+                }
+            }
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/products.json");
+                file.write(userList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {;
+            return values;
+        }
+    }
+
+
+    public static void modifyProduct (String name,String description,String price,String oldName) {
+        JSONArray userList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            int i=0;
+            int ok=1;
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(oldName.equals(json.get("name"))){
+                    break;
+                }else{
+                    if(ok==1)
+                        i++;
+                }
+            }
+
+            userList.remove(i);
+
+            JSONObject obj = new JSONObject();
+            obj.put("name", name);
+            obj.put("description", description);
+            obj.put("price", price);
+            obj.put("company", LoginController.username);
+            userList.add(obj);
+
+            try {
+
+                FileWriter file = new FileWriter("src/main/resources/JsonDatabases/products.json");
+                file.write(userList.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean productExists (String name){
+        JSONArray userList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(name.equals(json.get("name"))){
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("EE");
+        return false;
+    }
+
+    public static String printProduct (String name){
+        JSONArray userList;
+        String products="";
+        String productName="";
+        String productDescription="";
+        String productPrice="";
+        String productCompany="";
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                //System.out.println(json.get("name"));
+                if(name.equals(json.get("name"))) {
+                    productName = (String) json.get("name");
+                    productDescription = (String) json.get("description");
+                    productPrice = (String) json.get("price");
+                    productCompany = (String) json.get("company");
+                    products+="Name: "+productName+"\nDescription: "+productDescription+"\nPrice: "+productPrice+"\nCompany: "+productCompany+"\n\n";
+                    return products;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return products;
         }
     }
 
