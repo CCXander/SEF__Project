@@ -355,7 +355,6 @@ public class JsonObjHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("EE");
         return false;
     }
 
@@ -378,7 +377,6 @@ public class JsonObjHelper {
                 JSONObject element = iterator.next();
 
                 JSONObject json = (JSONObject) parser.parse(element.toJSONString());
-                //System.out.println(json.get("name"));
                 if(name.equals(json.get("name"))) {
                     productName = (String) json.get("name");
                     productDescription = (String) json.get("description");
@@ -393,6 +391,62 @@ public class JsonObjHelper {
             e.printStackTrace();
         }finally {
             return products;
+        }
+    }
+
+    public static String getAddress (String name) {
+        String Address="";
+        JSONArray userList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/customer.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(name.equals(json.get("username"))) {
+                    Address=(String) json.get("personalAddress");
+                    return Address;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return Address;
+        }
+    }
+
+    public static String getPrice (String name) {
+        String Price="";
+        JSONArray userList;
+
+        try {
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader("src/main/resources/JsonDatabases/products.json");
+            Object jsonObj = parser.parse(reader);
+            userList = (JSONArray) jsonObj;
+
+            Iterator<JSONObject> iterator = userList.iterator();
+            while(iterator.hasNext()) {
+                JSONObject element = iterator.next();
+
+                JSONObject json = (JSONObject) parser.parse(element.toJSONString());
+                if(name.equals(json.get("name"))) {
+                    Price=(String) json.get("price");
+                    return Price;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return Price;
         }
     }
 

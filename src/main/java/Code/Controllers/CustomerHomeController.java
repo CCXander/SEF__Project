@@ -5,13 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import Code.Helpers.Cryptography;
 import Code.Helpers.JsonObjHelper;
-import Code.Controllers.LoginController;
 
 import java.io.IOException;
 
@@ -45,6 +42,8 @@ public class CustomerHomeController {
 
     private Stage stage;
     private Scene scene;
+    public static String productName;
+    public static String productPrice;
 
     public void onLogoutButtonClick(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
@@ -54,8 +53,13 @@ public class CustomerHomeController {
         stage.show();
     }
 
-    public void onCheckOutButtonClick(){
-
+    public void onCheckOutButtonClick(ActionEvent event) throws IOException {
+        productPrice=JsonObjHelper.getPrice(productName);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("CheckOut.fxml"));
+        scene = new Scene(fxmlLoader.load());
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void onProductListClick(){
@@ -66,15 +70,13 @@ public class CustomerHomeController {
     }
 
     public void onSearchButtonClick(){
-        String name=searchField.getText();
-        if(JsonObjHelper.productExists(name)){
-            System.out.println("Exists");
+        productName =searchField.getText();
+        if(JsonObjHelper.productExists(productName)){
             productArea.setVisible(true);
             CheckOutButton.setVisible(true);
             searchErr.setVisible(false);
-            productArea.setText(JsonObjHelper.printProduct(name));
+            productArea.setText(JsonObjHelper.printProduct(productName));
         }else{
-            System.out.println("!Exists");
             productArea.setVisible(false);
             CheckOutButton.setVisible(false);
             searchErr.setVisible(true);

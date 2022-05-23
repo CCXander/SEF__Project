@@ -30,6 +30,7 @@ public class LoginController {
     private Label loginError;
 
     public static String username;
+    public static String Address;
     public String password;
     public int valid;
     public int offset;
@@ -64,6 +65,9 @@ public class LoginController {
             if(userType==1){
                 loginError.setVisible(true);
             }else if(userType==2){
+
+                Address=JsonObjHelper.getAddress(username);
+
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("customerHome.fxml"));
                 scene = new Scene(fxmlLoader.load());
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
